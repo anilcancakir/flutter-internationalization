@@ -18,7 +18,13 @@ class DemoLocalizations {
 
   Future<bool> load() async {
     String data = await rootBundle.loadString('resources/lang/${this.locale.languageCode}.json');
-    this._sentences = json.decode(data);
+    Map<String, dynamic> _result = json.decode(data);
+
+    this._sentences = new Map();
+    _result.forEach((String key, dynamic value) {
+      this._sentences[key] = value.toString();
+    });
+
     return true;
   }
 
